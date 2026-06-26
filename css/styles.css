@@ -13,12 +13,12 @@
   --sand-300: #e4d8c3;
   --ink: #1d2b2c;
   --muted: #5c6b6c;
-  --sun: #ffd23f;        /* was orange #e9a23b — changed to yellow */
-  --sun-dark: #f0bd1c;   /* was orange #d98b22 — changed to yellow */
-  --yellow: #ffd23f;
-  --yellow-dark: #f0bd1c;
+  --sun: #ffde3a;        /* yellow (brightened) */
+  --sun-dark: #f5cd24;   /* yellow hover (brightened) */
+  --yellow: #ffde3a;
+  --yellow-dark: #f5cd24;
   --sky: #1a6fd5;        /* palette sky blue (overview section) */
-  --aqua: #3fe0d4;       /* palette aqua/turquoise (facts bar) */
+  --aqua: #45efe1;       /* palette aqua/turquoise, brightened (facts bar) */
   --white: #ffffff;
   --shadow: 0 12px 32px rgba(13, 59, 64, 0.12);
   --shadow-sm: 0 4px 14px rgba(13, 59, 64, 0.10);
