@@ -7,24 +7,20 @@
    ========================================================= */
 
 /* ---------- Gallery data ----------
-   PLACEHOLDER PHOTOS: these point to free Unsplash beach images so the
-   site looks complete out of the box. Replace each `src` with your own
-   photos (drop them in an /images folder and use e.g. "images/living.jpg").
-   The first item spans two columns — make it your best "hero" shot.
+   The Dean Family Beach House ("Jubilee") photos, stored in /images.
+   The first item and one mid-gallery item span two columns (wide shots).
 */
 const GALLERY = [
-  { src: "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80", cap: "Beachfront exterior", wide: true },
-  { src: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80", cap: "Open living room" },
-  { src: "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=800&q=80", cap: "Fully equipped kitchen" },
-  { src: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80", cap: "Primary bedroom" },
-  { src: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80", cap: "Guest bedroom" },
-  { src: "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=800&q=80", cap: "Bathroom" },
-  { src: "https://images.unsplash.com/photo-1437846972679-9e6e537be46e?auto=format&fit=crop&w=800&q=80", cap: "Dining area" },
-  { src: "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1200&q=80", cap: "Gulf-front deck", wide: true },
-  { src: "https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&w=800&q=80", cap: "Sunset over the Gulf" },
-  { src: "https://images.unsplash.com/photo-1471922694854-ff1b63b20054?auto=format&fit=crop&w=800&q=80", cap: "White sand beach" },
-  { src: "https://images.unsplash.com/photo-1468413253725-0d5181091126?auto=format&fit=crop&w=800&q=80", cap: "Beach views" },
-  { src: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=800&q=80", cap: "Coastal mornings" }
+  { src: "images/jubilee-01.jpg", cap: "Gulf-front exterior", wide: true },
+  { src: "images/jubilee-03.jpg", cap: "Steps to the white-sand beach" },
+  { src: "images/jubilee-02.jpg", cap: "Covered deck with Gulf views" },
+  { src: "images/jubilee-04.jpg", cap: "Primary bedroom — king bed" },
+  { src: "images/jubilee-05.jpg", cap: "Guest bedroom — queen bed" },
+  { src: "images/jubilee-06.jpg", cap: "Guest bedroom" },
+  { src: "images/jubilee-08.jpg", cap: "Bedroom with deck access & Gulf view", wide: true },
+  { src: "images/jubilee-07.jpg", cap: "Coastal furnishings & smart TVs" },
+  { src: "images/jubilee-09.jpg", cap: "Walk-in shower bath" },
+  { src: "images/jubilee-10.jpg", cap: "Bath with double vanity & soaking tub" }
 ];
 
 /* ---------- Build gallery ---------- */

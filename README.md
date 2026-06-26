@@ -18,32 +18,32 @@ dean-beach-house/
 
 Just open `index.html` in any browser — no build step required.
 
-## ✏️ Things to customize (placeholders are marked)
+## Content
 
-Everything below is filled with reasonable **placeholder** content. Update it with
-the home's real details:
+The real listing content has been imported from the home's existing
+"Jubilee Beach House" listing:
 
-1. **Photos** — `js/script.js`, the `GALLERY` array near the top. The images
-   currently point to free Unsplash beach stock photos. Replace each `src` with
-   your own pictures: create an `images/` folder, drop photos in, and set
-   `src: "images/living-room.jpg"`, etc. The first photo and the deck photo span
-   two columns — use your best wide shots there. Also swap the hero background
-   image in `css/styles.css` (`.hero { background: ... }`).
+- **Photos** — 10 real photos live in `images/` (`jubilee-01.jpg` … `jubilee-10.jpg`)
+  and are wired into the `GALLERY` array in `js/script.js`.
+- **Specs** — 3 bedrooms / 2 baths / sleeps 10, ~2,000 sq ft.
+- **Beds** — 1 king, 1 queen, 1 full, 4 bunk beds.
+- **Amenities, description, and reviews** — taken from the live listing.
+- **Rates** — real 2026 seasonal nightly rates (summer $400, spring $375,
+  fall $350, winter $325), with a 7-night Sat-to-Sat minimum in summer.
 
-2. **Bed/bath/guest counts** — currently **4 BR / 3 BA / sleeps 10**. Search
-   `index.html` for these numbers (hero stats, "At a Glance" card, Rooms section)
-   and update to match the actual home.
+### ✏️ Still to update
 
-3. **Rates** — the Rates section uses estimate placeholders
-   (summer ~$3,200/wk, spring/fall ~$2,200/wk, winter ~$2,400/mo). Update with
-   your real pricing in `index.html`.
-
-4. **Phone number** — placeholder `(251) 555-1234` appears in the top bar, the
-   booking section, and the footer. Find/replace it with the real number.
+1. **Phone number** — the placeholder `(251) 555-1234` appears in the top bar,
+   booking section, and footer. Find/replace it with the real booking number.
    (Email is already set to `shane@deancamper.com`.)
+2. **Rates** — confirm the imported 2026 numbers are current before each season.
 
-5. **Room details, amenities, descriptions** — adjust the text in `index.html`
-   to reflect the actual home.
+### To swap or add photos
+
+Drop new images into `images/` and edit the `GALLERY` array in `js/script.js`
+(`src` + `cap`). The first item and one mid-gallery item span two columns — use
+your best wide shots there. The hero background is set in `css/styles.css`
+(`.hero { background: url("../images/…") }`).
 
 ## Booking form
 
