@@ -13,8 +13,8 @@
   --sand-300: #e4d8c3;
   --ink: #1d2b2c;
   --muted: #5c6b6c;
-  --sun: #e9a23b;
-  --sun-dark: #d98b22;
+  --sun: #ffd23f;        /* was orange #e9a23b — changed to yellow */
+  --sun-dark: #f0bd1c;   /* was orange #d98b22 — changed to yellow */
   --yellow: #ffd23f;
   --yellow-dark: #f0bd1c;
   --white: #ffffff;
