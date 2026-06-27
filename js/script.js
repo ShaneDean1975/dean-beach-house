@@ -20,7 +20,10 @@ const GALLERY = [
   { src: "images/jubilee-08.jpg", cap: "Bedroom with deck access & Gulf view", wide: true },
   { src: "images/jubilee-07.jpg", cap: "Coastal furnishings & smart TVs" },
   { src: "images/jubilee-09.jpg", cap: "Walk-in shower bath" },
-  { src: "images/jubilee-10.jpg", cap: "Bath with double vanity & soaking tub" }
+  { src: "images/jubilee-10.jpg", cap: "Bath with double vanity & soaking tub" },
+  { src: "images/outdoor-1.jpg", cap: "Picnic table under the house" },
+  { src: "images/outdoor-2.jpg", cap: "Outdoor shower & storage area" },
+  { src: "images/outdoor-3.jpg", cap: "Enclosed outdoor shower" }
 ];
 
 /* ---------- Build gallery ---------- */
