@@ -130,9 +130,9 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- Facts bar ---------- */
 .facts { background: var(--aqua); color: var(--teal-900); }
-.facts__grid { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 14px 24px; padding: 22px 24px; }
-.fact { display: flex; align-items: center; gap: 10px; font-size: 0.86rem; font-weight: 500; letter-spacing: 0.02em; }
-.fact__icon { font-size: 1.3rem; }
+.facts__grid { display: flex; flex-wrap: wrap; justify-content: space-around; align-items: center; gap: 16px 28px; padding: 28px 24px; }
+.fact { display: flex; align-items: center; gap: 12px; font-family: "Pacifico", cursive; font-size: 1.35rem; font-weight: 400; letter-spacing: 0; }
+.fact__icon { font-size: 2.2rem; }
 
 /* ---------- Sections ---------- */
 .section { padding: 42px 0 84px; }
