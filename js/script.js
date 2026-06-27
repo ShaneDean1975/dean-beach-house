@@ -23,7 +23,8 @@ const GALLERY = [
   { src: "images/jubilee-10.jpg", cap: "Bath with double vanity & soaking tub" },
   { src: "images/outdoor-1.jpg", cap: "Picnic table under the house" },
   { src: "images/outdoor-2.jpg", cap: "Outdoor shower & storage area" },
-  { src: "images/outdoor-3.jpg", cap: "Enclosed outdoor shower" }
+  { src: "images/outdoor-3.jpg", cap: "Enclosed outdoor shower" },
+  { src: "images/outdoor-4.jpg", cap: "Beach gear provided — floats, chairs & toys" }
 ];
 
 /* ---------- Build gallery ---------- */
