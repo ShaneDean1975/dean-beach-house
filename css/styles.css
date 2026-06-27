@@ -195,6 +195,9 @@ a { color: inherit; text-decoration: none; }
 
 /* Guest Reviews section matches the gallery background (white) */
 #reviews { background: #ffffff; }
+
+/* Bedrooms & Beds section background white */
+#rooms { background: #ffffff; }
 #reviews .section__title { color: var(--sun); text-shadow: 0 1px 2px rgba(13, 59, 64, 0.22); }
 
 /* ---------- Amenities ---------- */
@@ -306,6 +309,7 @@ a { color: inherit; text-decoration: none; }
 .footer__col .btn { display: inline-block; color: #2a1c05; }
 .brand--footer { margin-bottom: 14px; }
 .brand--footer .brand__name { color: #fff; }
+.brand--footer .brand__sub { color: var(--sun); }
 .footer__bar { border-top: 1px solid rgba(255,255,255,0.12); padding: 18px 0; }
 .footer__bar-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 0.76rem; color: rgba(255,255,255,0.6); }
 @media (max-width: 860px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
