@@ -151,6 +151,7 @@ a { color: inherit; text-decoration: none; }
 .section__lead em { color: var(--teal-700); }
 
 /* ---------- Gallery ---------- */
+#gallery { background: #ffffff; }
 .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .gallery__item {
   position: relative; overflow: hidden; border-radius: var(--radius);
