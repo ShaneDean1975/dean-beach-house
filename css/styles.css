@@ -316,7 +316,7 @@ a { color: inherit; text-decoration: none; }
 .footer__col p { font-size: 0.88rem; margin-bottom: 10px; line-height: 1.6; }
 .footer__col a { display: block; font-size: 0.88rem; color: var(--sand-200); padding: 4px 0; transition: color 0.15s; }
 .footer__col a:hover { color: var(--sun); }
-.footer__col .btn { display: inline-block; color: #2a1c05; }
+.footer__col .btn { display: inline-block; color: #2a1c05; font-size: 0.74rem; padding: 10px 22px; }
 .brand--footer { margin-bottom: 14px; }
 .brand--footer .brand__name { color: #fff; }
 .brand--footer .brand__sub { color: var(--sun); }
