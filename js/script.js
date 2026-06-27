@@ -11,7 +11,7 @@
    The first item and one mid-gallery item span two columns (wide shots).
 */
 const GALLERY = [
-  { src: "images/jubilee-01.jpg", cap: "Gulf-front exterior", wide: true },
+  { src: "images/gulf-shores-beach-house-rental.jpg", cap: "Gulf-front exterior", wide: true },
   { src: "images/jubilee-03.jpg", cap: "Steps to the white-sand beach" },
   { src: "images/jubilee-02.jpg", cap: "Covered deck with Gulf views" },
   { src: "images/jubilee-04.jpg", cap: "Primary bedroom — king bed" },
