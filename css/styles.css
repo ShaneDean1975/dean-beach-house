@@ -141,7 +141,7 @@ a { color: inherit; text-decoration: none; }
 .fact__icon { font-size: 1.4rem; }
 
 /* ---------- Sections ---------- */
-.section { padding: 42px 0 84px; }
+.section { padding: 21px 0 42px; }
 .section--alt { background: var(--sand-200); }
 .section__eyebrow { text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.76rem; font-weight: 700; color: var(--teal-500); margin-bottom: 10px; }
 .section__eyebrow--light { color: var(--sun); }
@@ -186,7 +186,7 @@ a { color: inherit; text-decoration: none; }
 #overview .overview__text strong { color: #fff; }
 
 /* Rates section uses the same sky blue as the overview */
-#rates { background: var(--sky); padding-bottom: 42px; }
+#rates { background: var(--sky); padding-bottom: 21px; }
 #rates .section__eyebrow { color: #d6e9ff; }
 #rates .section__title { color: #fff; }
 #rates .section__lead { color: #eaf3ff; }
