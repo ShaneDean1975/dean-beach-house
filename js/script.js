@@ -88,7 +88,7 @@ nav.querySelectorAll("a").forEach((a) =>
    client. To accept submissions automatically, point `action` at a service
    like Formspree/Netlify Forms, or wire up your own endpoint — see README.
 */
-const OWNER_EMAIL = "shane@deancamper.com";
+const OWNER_EMAIL = "sdean71@charter.net";
 const form = document.getElementById("bookForm");
 const status = document.getElementById("bookStatus");
 
