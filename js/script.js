@@ -131,5 +131,64 @@ form.addEventListener("submit", (e) => {
   form.reset();
 });
 
+/* ---------- Availability calendar ----------
+   To update bookings, edit the two values below:
+   • RENTED_THROUGH — every date on or before this date shows as Rented.
+   • BOOKED_DATES   — additional individual booked dates ("YYYY-MM-DD").
+*/
+const RENTED_THROUGH = "2026-07-03";
+const BOOKED_DATES = ["2026-07-10", "2026-07-11"];
+
+(function () {
+  const grid = document.getElementById("calGrid");
+  if (!grid) return;
+  const monthLabel = document.getElementById("calMonth");
+  const DOW = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const MONTHS = ["January", "February", "March", "April", "May", "June",
+                  "July", "August", "September", "October", "November", "December"];
+  const today = new Date();
+  let viewY = today.getFullYear();
+  let viewM = today.getMonth();
+
+  const key = (y, m, d) =>
+    y + "-" + String(m + 1).padStart(2, "0") + "-" + String(d).padStart(2, "0");
+  const isRented = (k) => k <= RENTED_THROUGH || BOOKED_DATES.includes(k);
+
+  function render() {
+    monthLabel.textContent = MONTHS[viewM] + " " + viewY;
+    grid.innerHTML = "";
+    DOW.forEach((d) => {
+      const el = document.createElement("div");
+      el.className = "cal__dow";
+      el.textContent = d;
+      grid.appendChild(el);
+    });
+    const firstDay = new Date(viewY, viewM, 1).getDay();
+    const daysInMonth = new Date(viewY, viewM + 1, 0).getDate();
+    for (let i = 0; i < firstDay; i++) {
+      const el = document.createElement("div");
+      el.className = "cal__day cal__day--empty";
+      grid.appendChild(el);
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const k = key(viewY, viewM, d);
+      const rented = isRented(k);
+      const el = document.createElement("div");
+      el.className = "cal__day " + (rented ? "cal__day--rented" : "cal__day--avail");
+      el.textContent = d;
+      el.title = rented ? "Rented" : "Available";
+      grid.appendChild(el);
+    }
+  }
+
+  document.getElementById("calPrev").addEventListener("click", () => {
+    viewM--; if (viewM < 0) { viewM = 11; viewY--; } render();
+  });
+  document.getElementById("calNext").addEventListener("click", () => {
+    viewM++; if (viewM > 11) { viewM = 0; viewY++; } render();
+  });
+  render();
+})();
+
 /* ---------- Footer year ---------- */
 document.getElementById("year").textContent = new Date().getFullYear();

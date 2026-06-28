@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=38" />
+  <link rel="stylesheet" href="css/styles.css?v=39" />
 </head>
 <body>
 
@@ -325,6 +325,20 @@
         <button type="submit" class="btn btn--primary btn--block">Send Booking Request</button>
         <p class="book__status" id="bookStatus" role="status"></p>
       </form>
+      <div class="availability">
+        <h3 class="availability__title">Availability Calendar</h3>
+        <div class="cal__head">
+          <button class="cal__nav" id="calPrev" type="button" aria-label="Previous month">&#8249;</button>
+          <span class="cal__month" id="calMonth"></span>
+          <button class="cal__nav" id="calNext" type="button" aria-label="Next month">&#8250;</button>
+        </div>
+        <div class="cal__grid" id="calGrid"></div>
+        <div class="cal__legend">
+          <span><i class="cal__swatch cal__swatch--avail"></i> Available</span>
+          <span><i class="cal__swatch cal__swatch--rented"></i> Rented</span>
+        </div>
+        <p class="cal__note">Dates shown are current as of today — contact us to confirm and reserve.</p>
+      </div>
     </div>
   </section>
 
@@ -420,6 +434,6 @@
     <button class="lightbox__nav lightbox__next" id="lbNext" aria-label="Next">&#8250;</button>
   </div>
 
-  <script src="js/script.js?v=5"></script>
+  <script src="js/script.js?v=6"></script>
 </body>
 </html>
