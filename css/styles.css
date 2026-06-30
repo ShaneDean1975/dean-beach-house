@@ -156,7 +156,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ---------- Gallery ---------- */
 #gallery { background: #ffffff; }
-.gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-flow: dense; gap: 12px; }
 .gallery__item {
   position: relative; overflow: hidden; border-radius: var(--radius);
   aspect-ratio: 4 / 3; cursor: pointer; background: var(--sand-300);
