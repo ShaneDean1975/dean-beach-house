@@ -200,6 +200,9 @@ a { color: inherit; text-decoration: none; }
 /* Guest Reviews section matches the gallery background (white) */
 #reviews { background: #ffffff; }
 
+/* Availability calendar section background aqua */
+#availability { background: var(--aqua); }
+
 /* Bedrooms & Beds section background white */
 #rooms { background: #ffffff; }
 
