@@ -88,7 +88,9 @@ nav.querySelectorAll("a").forEach((a) =>
    client. To accept submissions automatically, point `action` at a service
    like Formspree/Netlify Forms, or wire up your own endpoint — see README.
 */
-const OWNER_EMAIL = "sdean71@charter.net";
+// Assembled at runtime so the address never appears verbatim in source
+// (defeats spam harvesters that regex raw HTML/JS for email patterns).
+const OWNER_EMAIL = ["sdean71", "charter.net"].join("@");
 const form = document.getElementById("bookForm");
 const status = document.getElementById("bookStatus");
 
@@ -201,6 +203,16 @@ if (brandLink) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
+/* ---------- Obfuscated email links ----------
+   The address is stored in pieces in data attributes and assembled here,
+   so it never appears as scrape-able text in the page source.
+*/
+document.querySelectorAll(".email-link").forEach((a) => {
+  const addr = a.dataset.u + "@" + a.dataset.d + "." + a.dataset.t;
+  a.href = "mailto:" + addr;
+  a.textContent = addr;
+});
 
 /* ---------- Footer year ---------- */
 document.getElementById("year").textContent = new Date().getFullYear();
