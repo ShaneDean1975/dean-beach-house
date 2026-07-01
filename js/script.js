@@ -190,5 +190,17 @@ const BOOKED_DATES = ["2026-07-10", "2026-07-11"];
   render();
 })();
 
+/* ---------- Logo scrolls to top ----------
+   #top sits on the sticky header, which is always in view, so a plain
+   anchor jump does nothing. Scroll to the very top explicitly instead.
+*/
+const brandLink = document.querySelector('a.brand[href="#top"]');
+if (brandLink) {
+  brandLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
 /* ---------- Footer year ---------- */
 document.getElementById("year").textContent = new Date().getFullYear();
