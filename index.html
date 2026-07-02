@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=48" />
+  <link rel="stylesheet" href="css/styles.css?v=50" />
 </head>
 <body>
 
@@ -295,53 +295,40 @@
         <div class="field-row">
           <label class="field">
             <span>First Name</span>
-            <input type="text" name="firstName" required />
+            <input type="text" id="bfFirst" required />
           </label>
           <label class="field">
             <span>Last Name</span>
-            <input type="text" name="lastName" required />
+            <input type="text" id="bfLast" required />
           </label>
         </div>
         <div class="field-row">
           <label class="field">
             <span>Email</span>
-            <input type="email" name="email" required />
+            <input type="email" id="bfEmail" required />
           </label>
           <label class="field">
             <span>Phone</span>
-            <input type="tel" name="phone" />
+            <input type="tel" id="bfPhone" placeholder="(555) 555-5555" />
           </label>
         </div>
         <div class="field-row">
           <label class="field">
             <span>Check-in</span>
-            <input type="date" name="checkin" required />
+            <input type="date" id="bfCheckin" required />
           </label>
           <label class="field">
             <span>Check-out</span>
-            <input type="date" name="checkout" required />
-          </label>
-        </div>
-        <div class="field-row">
-          <label class="field">
-            <span>Guests</span>
-            <select name="guests">
-              <option>1</option><option>2</option><option>3</option><option>4</option>
-              <option>5</option><option>6</option><option>7</option><option>8</option>
-              <option>9</option><option>10</option>
-            </select>
-          </label>
-          <label class="field">
-            <span>Bringing a pet?</span>
-            <select name="pet">
-              <option value="no">No</option>
-              <option value="yes">Yes</option>
-            </select>
+            <input type="date" id="bfCheckout" required />
           </label>
         </div>
         <label class="field">
-          <span>Message <small>(optional)</small></span>
-          <textarea name="message" rows="3" placeholder="Tell us about your trip…"></textarea>
+          <span>Guests</span>
+          <select name="Field10" id="bfGuests">
+            <option>1</option><option>2</option><option>3</option><option>4</option>
+            <option>5</option><option>6</option><option>7</option><option>8</option>
+            <option>9</option><option>10</option>
+          </select>
         </label>
         <button type="submit" class="btn btn--primary btn--block">Send Booking Request</button>
         <p class="book__status" id="bookStatus" role="status"></p>
@@ -441,6 +428,6 @@
     <button class="lightbox__nav lightbox__next" id="lbNext" aria-label="Next">&#8250;</button>
   </div>
 
-  <script src="js/script.js?v=8"></script>
+  <script src="js/script.js?v=11"></script>
 </body>
 </html>

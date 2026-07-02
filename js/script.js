@@ -83,18 +83,20 @@ nav.querySelectorAll("a").forEach((a) =>
   a.addEventListener("click", () => nav.classList.remove("is-open"))
 );
 
-/* ---------- Booking form ----------
-   With no backend, this composes an email to the owner via the user's mail
-   client. To accept submissions automatically, point `action` at a service
-   like Formspree/Netlify Forms, or wire up your own endpoint — see README.
+/* ---------- Booking form (hands off to Wufoo) ----------
+   The visitor fills the site's styled form; on submit we open the owner's
+   Wufoo form (deancamper.wufoo.com/forms/sbzzrox09unjge) with every field
+   pre-filled via Wufoo's /def/ URL feature. The visitor presses Submit
+   there (Wufoo requires its own page's security key), and the entry is
+   emailed to the owner and logged in the Wufoo account.
 */
-// Assembled at runtime so the address never appears verbatim in source
-// (defeats spam harvesters that regex raw HTML/JS for email patterns).
-const OWNER_EMAIL = ["sdean71", "charter.net"].join("@");
+const WUFOO_URL = "https://deancamper.wufoo.com/forms/sbzzrox09unjge/";
 const form = document.getElementById("bookForm");
 const status = document.getElementById("bookStatus");
 
-form.addEventListener("submit", (e) => {
+const val = (id) => document.getElementById(id).value;
+
+if (form) form.addEventListener("submit", (e) => {
   e.preventDefault();
   status.className = "book__status";
   status.textContent = "";
@@ -106,31 +108,38 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
-  const d = Object.fromEntries(new FormData(form).entries());
-
-  if (d.checkin && d.checkout && d.checkout <= d.checkin) {
+  const checkin = val("bfCheckin");   // yyyy-mm-dd
+  const checkout = val("bfCheckout");
+  if (checkin && checkout && checkout <= checkin) {
     status.classList.add("is-err");
     status.textContent = "Check-out must be after check-in.";
     return;
   }
 
-  const subject = `Booking Request — Dean Family Beach House (${d.checkin} to ${d.checkout})`;
-  const body =
-    `Name: ${d.firstName} ${d.lastName}\n` +
-    `Email: ${d.email}\n` +
-    `Phone: ${d.phone || "—"}\n` +
-    `Check-in: ${d.checkin}\n` +
-    `Check-out: ${d.checkout}\n` +
-    `Guests: ${d.guests}\n` +
-    `Pet: ${d.pet}\n\n` +
-    `Message:\n${d.message || "—"}\n`;
+  const [inY, inM, inD] = checkin.split("-");
+  const [outY, outM, outD] = checkout.split("-");
+  const digits = val("bfPhone").replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "");
 
-  window.location.href =
-    `mailto:${OWNER_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const fields = {
+    "Field1": val("bfFirst").trim(),
+    "Field2": val("bfLast").trim(),
+    "Field3": val("bfEmail").trim(),
+    "Field4": digits.slice(0, 3),
+    "Field4-1": digits.slice(3, 6),
+    "Field4-2": digits.slice(6, 10),
+    "Field5-1": inM, "Field5-2": inD, "Field5": inY,
+    "Field6-1": outM, "Field6-2": outD, "Field6": outY,
+    "Field10": val("bfGuests")
+  };
+
+  const query = Object.entries(fields)
+    .filter(([, v]) => v !== "")
+    .map(([k, v]) => k + "=" + encodeURIComponent(v))
+    .join("&");
 
   status.classList.add("is-ok");
-  status.textContent = "Opening your email app to send the request… If nothing happens, email " + OWNER_EMAIL + " directly.";
-  form.reset();
+  status.textContent = "Opening our secure booking form — press Submit there to send.";
+  window.location.href = WUFOO_URL + "def/" + query;
 });
 
 /* ---------- Availability calendar ----------
