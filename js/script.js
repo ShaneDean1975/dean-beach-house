@@ -83,20 +83,19 @@ nav.querySelectorAll("a").forEach((a) =>
   a.addEventListener("click", () => nav.classList.remove("is-open"))
 );
 
-/* ---------- Booking form (hands off to Wufoo) ----------
-   The visitor fills the site's styled form; on submit we open the owner's
-   Wufoo form (deancamper.wufoo.com/forms/sbzzrox09unjge) with every field
-   pre-filled via Wufoo's /def/ URL feature. The visitor presses Submit
-   there (Wufoo requires its own page's security key), and the entry is
-   emailed to the owner and logged in the Wufoo account.
+/* ---------- Booking form (one-click via relay) ----------
+   Submits straight from the site: the form posts JSON to a Cloudflare
+   Worker relay, which creates the entry in the owner's Wufoo account
+   through Wufoo's API (email notifications + entry log still fire).
+   The Wufoo API key lives only in the relay, never in this site.
 */
-const WUFOO_URL = "https://deancamper.wufoo.com/forms/sbzzrox09unjge/";
+const RELAY_URL = "https://gulf-shores-booking-relay.beachhouse.workers.dev/";
 const form = document.getElementById("bookForm");
 const status = document.getElementById("bookStatus");
 
 const val = (id) => document.getElementById(id).value;
 
-if (form) form.addEventListener("submit", (e) => {
+if (form) form.addEventListener("submit", async (e) => {
   e.preventDefault();
   status.className = "book__status";
   status.textContent = "";
@@ -120,7 +119,7 @@ if (form) form.addEventListener("submit", (e) => {
   const [outY, outM, outD] = checkout.split("-");
   const digits = val("bfPhone").replace(/\D/g, "").replace(/^1(?=\d{10}$)/, "");
 
-  const fields = {
+  const payload = {
     "Field1": val("bfFirst").trim(),
     "Field2": val("bfLast").trim(),
     "Field3": val("bfEmail").trim(),
@@ -129,17 +128,35 @@ if (form) form.addEventListener("submit", (e) => {
     "Field4-2": digits.slice(6, 10),
     "Field5-1": inM, "Field5-2": inD, "Field5": inY,
     "Field6-1": outM, "Field6-2": outD, "Field6": outY,
-    "Field10": val("bfGuests")
+    "Field10": val("bfGuests"),
+    "website": val("bfWebsite")   // honeypot — humans leave it empty
   };
 
-  const query = Object.entries(fields)
-    .filter(([, v]) => v !== "")
-    .map(([k, v]) => k + "=" + encodeURIComponent(v))
-    .join("&");
-
+  const btn = form.querySelector("button[type=submit]");
+  btn.disabled = true;
   status.classList.add("is-ok");
-  status.textContent = "Opening our secure booking form — press Submit there to send.";
-  window.location.href = WUFOO_URL + "def/" + query;
+  status.textContent = "Sending your request…";
+
+  try {
+    const resp = await fetch(RELAY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    const out = await resp.json();
+    if (out.ok) {
+      status.className = "book__status is-ok";
+      status.textContent = "Request sent! We'll be in touch soon — usually the same day.";
+      form.reset();
+    } else {
+      throw new Error(out.error || "send failed");
+    }
+  } catch (err) {
+    status.className = "book__status is-err";
+    status.textContent = "Sorry — something went wrong sending your request. Please call (618) 954-9645 or email us instead.";
+  } finally {
+    btn.disabled = false;
+  }
 });
 
 /* ---------- Availability calendar ----------

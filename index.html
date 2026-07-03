@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.google.com; connect-src 'self'; form-action 'self'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-src https://www.google.com; connect-src 'self' https://gulf-shores-booking-relay.beachhouse.workers.dev; form-action 'self'" />
   <title>Dean Family Beach House | Gulf-View Vacation Rental in Fort Morgan, AL</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="description" content="Rent the Dean Family Beach House ('Jubilee') — a 3-bedroom Gulf-view vacation home steps from the beach at 5993 Beach Boulevard, Fort Morgan, Alabama. Sleeps 10. Weekly summer stays, weekly or monthly winter stays." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=50" />
+  <link rel="stylesheet" href="css/styles.css?v=51" />
 </head>
 <body>
 
@@ -330,6 +330,8 @@
             <option>9</option><option>10</option>
           </select>
         </label>
+        <!-- honeypot: hidden from humans; bots that fill it are silently dropped -->
+        <input type="text" id="bfWebsite" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <button type="submit" class="btn btn--primary btn--block">Send Booking Request</button>
         <p class="book__status" id="bookStatus" role="status"></p>
       </form>
@@ -428,6 +430,6 @@
     <button class="lightbox__nav lightbox__next" id="lbNext" aria-label="Next">&#8250;</button>
   </div>
 
-  <script src="js/script.js?v=11"></script>
+  <script src="js/script.js?v=12"></script>
 </body>
 </html>

@@ -292,6 +292,7 @@ a { color: inherit; text-decoration: none; }
   outline: none; border-color: var(--teal-500); box-shadow: 0 0 0 3px rgba(42,157,143,0.18); background: #fff;
 }
 .field textarea { resize: vertical; }
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .book__status { margin-top: 14px; font-size: 0.9rem; font-weight: 600; text-align: center; min-height: 1.2em; }
 .book__status.is-ok { color: var(--teal-700); }
 .book__status.is-err { color: #c0392b; }
