@@ -6,3 +6,6 @@ Desktop.ini
 # Editor
 .vscode/
 *.swp
+
+# wrangler local cache
+relay/.wrangler/
