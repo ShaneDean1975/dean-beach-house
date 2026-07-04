@@ -330,6 +330,18 @@ a { color: inherit; text-decoration: none; }
 .location__nearby { font-size: 0.92rem; }
 @media (max-width: 860px) { .location { grid-template-columns: 1fr; } }
 
+/* ---------- Nearby sites & activities ---------- */
+.area-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.area-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border-top: 5px solid var(--sky); transition: transform 0.2s; }
+.area-card:hover { transform: translateY(-4px); }
+.area-card img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
+.area-card__body { padding: 20px 22px 24px; }
+.area-card h3 { font-family: var(--serif); font-size: 1.4rem; color: var(--teal-900); margin-bottom: 8px; }
+.area-card p { font-size: 0.9rem; color: #3a4a4c; }
+.area-credits { margin-top: 18px; font-size: 0.7rem; color: var(--muted); text-align: center; }
+@media (max-width: 960px) { .area-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .area-grid { grid-template-columns: 1fr; } }
+
 /* ---------- CTA strip ---------- */
 .cta-strip { background: var(--sun); color: #2a1c05; text-align: center; padding: 29px 0; }
 .cta-strip h2 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 8px; color: var(--sky); }
