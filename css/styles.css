@@ -338,6 +338,8 @@ a { color: inherit; text-decoration: none; }
 .area-card__body { padding: 20px 22px 24px; }
 .area-card h3 { font-family: var(--serif); font-size: 1.4rem; color: var(--teal-900); margin-bottom: 8px; }
 .area-card p { font-size: 0.9rem; color: #3a4a4c; }
+.area-card a { color: var(--sky); font-weight: 600; text-decoration: underline; }
+.area-card a:hover { color: #11539e; }
 .area-credits { margin-top: 18px; font-size: 0.7rem; color: var(--muted); text-align: center; }
 @media (max-width: 960px) { .area-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .area-grid { grid-template-columns: 1fr; } }
