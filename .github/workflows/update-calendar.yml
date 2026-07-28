@@ -1,0 +1,41 @@
+# Fetches the beach house calendar from iCloud every 2 hours and saves it
+# as calendar.ics in the repo, so the website can display availability.
+#
+# This file must live at:  .github/workflows/update-calendar.yml
+
+name: Update calendar from iCloud
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"   # every 2 hours
+  workflow_dispatch: {}      # also allows running it manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Download the calendar feed
+        run: |
+          curl -fsSL -o calendar.ics.new \
+            "https://p167-caldav.icloud.com/published/2/NjAzNzQxOTU2NjAzNzQxOQA64LxSXVP7Hv5Rx1xgWOKAr66g-pfF5XfIWEyxxIIdoeI-AGbWw-mgjUs_WONHrpvGpzUZM-7dhoBHAM1aA_k"
+          # Basic sanity check so a bad response never replaces a good file
+          grep -q "BEGIN:VCALENDAR" calendar.ics.new
+          mv calendar.ics.new calendar.ics
+
+      - name: Commit if the calendar changed
+        run: |
+          git config user.name "calendar-bot"
+          git config user.email "actions@github.com"
+          git add calendar.ics
+          if git diff --cached --quiet; then
+            echo "No changes to the calendar."
+          else
+            git commit -m "Update availability calendar"
+            git push
+          fi

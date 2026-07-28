@@ -160,9 +160,13 @@ if (form) form.addEventListener("submit", async (e) => {
 });
 
 /* ---------- Availability calendar ----------
-   To update bookings, edit the two values below:
-   • RENTED_THROUGH — every date on or before this date shows as Rented.
-   • BOOKED_DATES   — additional individual booked dates ("YYYY-MM-DD").
+   Booked dates load automatically from calendar.ics, which a GitHub
+   Action refreshes from the shared iCloud "beach house" calendar every
+   2 hours. To change availability, just edit the calendar on an iPhone
+   signed into the shared iCloud account — no code changes needed.
+
+   The two values below are only a FALLBACK, shown if calendar.ics
+   can't be loaded for some reason.
 */
 const RENTED_THROUGH = "2026-07-03";
 const BOOKED_DATES = ["2026-07-10", "2026-07-11"];
@@ -178,9 +182,55 @@ const BOOKED_DATES = ["2026-07-10", "2026-07-11"];
   let viewY = today.getFullYear();
   let viewM = today.getMonth();
 
+  // Booked days loaded from the iCloud feed ("YYYY-MM-DD" -> true).
+  // Starts null; filled in once calendar.ics loads.
+  let icsBooked = null;
+
   const key = (y, m, d) =>
     y + "-" + String(m + 1).padStart(2, "0") + "-" + String(d).padStart(2, "0");
-  const isRented = (k) => k <= RENTED_THROUGH || BOOKED_DATES.includes(k);
+
+  const isRented = (k) =>
+    icsBooked
+      ? !!icsBooked[k]
+      : k <= RENTED_THROUGH || BOOKED_DATES.includes(k); // fallback
+
+  /* --- Minimal ICS parsing (covers standard iCloud events) --- */
+  function parseICS(text) {
+    const booked = {};
+    const unfolded = text.replace(/\r\n[ \t]/g, "").replace(/\n[ \t]/g, "");
+    const events = unfolded.split("BEGIN:VEVENT").slice(1);
+    const parseDate = (v) => {
+      const m = v.match(/^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2}))?/);
+      return m ? new Date(+m[1], +m[2] - 1, +m[3], m[4] ? +m[4] : 0, m[5] ? +m[5] : 0) : null;
+    };
+    const dayKey = (d) => key(d.getFullYear(), d.getMonth(), d.getDate());
+
+    events.forEach((block) => {
+      const startMatch = block.match(/DTSTART[^:]*:([^\r\n]+)/);
+      const endMatch = block.match(/DTEND[^:]*:([^\r\n]+)/);
+      if (!startMatch) return;
+      const isAllDay = /VALUE=DATE/.test(block.match(/DTSTART([^:]*)/)[1]);
+      const start = parseDate(startMatch[1]);
+      const end = endMatch ? parseDate(endMatch[1]) : new Date(start);
+      if (!start) return;
+
+      // For all-day events the end date is the day AFTER checkout per the
+      // ICS spec, so stop one day early.
+      const last = new Date(end);
+      if (isAllDay || /^\d{8}$/.test(endMatch ? endMatch[1] : "")) {
+        last.setDate(last.getDate() - 1);
+      }
+      if (last < start) last.setTime(start.getTime());
+
+      const d = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+      const stop = new Date(last.getFullYear(), last.getMonth(), last.getDate());
+      while (d <= stop) {
+        booked[dayKey(d)] = true;
+        d.setDate(d.getDate() + 1);
+      }
+    });
+    return booked;
+  }
 
   function render() {
     monthLabel.textContent = MONTHS[viewM] + " " + viewY;
@@ -216,6 +266,16 @@ const BOOKED_DATES = ["2026-07-10", "2026-07-11"];
     viewM++; if (viewM > 11) { viewM = 0; viewY++; } render();
   });
   render();
+
+  // Load the live availability feed and re-render once it arrives.
+  fetch("calendar.ics", { cache: "no-cache" })
+    .then((r) => { if (!r.ok) throw new Error("no feed"); return r.text(); })
+    .then((text) => {
+      if (text.indexOf("BEGIN:VCALENDAR") === -1) throw new Error("bad feed");
+      icsBooked = parseICS(text);
+      render();
+    })
+    .catch(() => { /* keep fallback dates */ });
 })();
 
 /* ---------- Logo scrolls to top ----------
