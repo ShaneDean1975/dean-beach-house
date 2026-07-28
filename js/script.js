@@ -189,10 +189,15 @@ const BOOKED_DATES = ["2026-07-10", "2026-07-11"];
   const key = (y, m, d) =>
     y + "-" + String(m + 1).padStart(2, "0") + "-" + String(d).padStart(2, "0");
 
-  const isRented = (k) =>
-    icsBooked
+  // Any date before today always shows as Rented.
+  const todayKey = key(today.getFullYear(), today.getMonth(), today.getDate());
+
+  const isRented = (k) => {
+    if (k < todayKey) return true; // past dates
+    return icsBooked
       ? !!icsBooked[k]
       : k <= RENTED_THROUGH || BOOKED_DATES.includes(k); // fallback
+  };
 
   /* --- Minimal ICS parsing (covers standard iCloud events) --- */
   function parseICS(text) {
